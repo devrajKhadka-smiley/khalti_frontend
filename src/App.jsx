@@ -21,9 +21,8 @@ export default function App() {
   const handleBuy = async (product) => {
     console.log("hello world", product);
     const payload = {
-      // return_url: import.meta.env.REACT_PUBLIC_SUCCESS_URL,
-      return_url: "http://localhost:5173/success",
-      website_url: "http://localhost:5173",
+      return_url: import.meta.env.VITE_PUBLIC_SUCCESS_URL,
+      website_url: import.meta.env.VITE_PUBLIC_WEBSITE_URL,
       amount: parseInt(product.price) * 100,
       purchase_order_id: "test12",
       purchase_order_name: "test",
@@ -36,7 +35,7 @@ export default function App() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/khalti-api",
+        import.meta.env.VITE_BACKEND_URL,
         payload
       );
       if (response) {
