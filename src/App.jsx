@@ -30,6 +30,7 @@ export default function App() {
         name: "Dev Raj Khadka",
         email: "dev@gmail.com",
         phone: "9746464745",
+        Location: "GangaLal-06, Kathmandu, Nepal"
       },
     };
 
