@@ -12,7 +12,7 @@ const Success = () => {
     <div className="success">
       <h1>Payment Successful!</h1>
       <p>Thank you for your purchase.</p>
-      <p>I am rich now!</p>
+      {/* <p>I am rich now!</p> */}
       <button onClick={handleGoHome}>Go to Home</button>
     </div>
   );

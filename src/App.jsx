@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./card";
 import "./App.css";
+import { useNavigate } from "react-router-dom"; 
 
 export default function App() {
   const [allProducts, setAllProducts] = useState([]);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchStoreProducts = async () => {
@@ -30,34 +33,46 @@ export default function App() {
         name: "Dev Raj Khadka",
         email: "dev@gmail.com",
         phone: "9746464745",
-        Location: "GangaLal-06, Kathmandu, Nepal"
+        Location: "GangaLal-06, Kathmandu, Nepal",
       },
     };
 
     try {
-      const response = await axios.post(
-        import.meta.env.VITE_BACKEND_URL,
-        payload
-      );
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL, payload);
       if (response) {
         window.location.href = `${response.data.data.payment_url}`;
+        setPaymentSuccess(true); 
       }
     } catch (error) {
       console.error("Error during payment process:", error);
     }
   };
 
+  const handleRedirect = () => {
+    navigate("/"); 
+  };
+
   return (
     <main className="app">
       <h2 className="app-title">Khalti Integration - Green Cycle Market</h2>
       <hr className="bg-white w-full" />
-      <div className="product-grid">
-        {allProducts.map((product) => (
-          <div className="card-wrap" key={product.id}>
-            <Card product={product} onHandleBuy={handleBuy} />
-          </div>
-        ))}
-      </div>
+
+      {paymentSuccess ? (
+        <div className="success-message">
+          <h3>Payment Successful!</h3>
+          <button onClick={handleRedirect} className="redirect-button">
+            Go to Home
+          </button>
+        </div>
+      ) : (
+        <div className="product-grid">
+          {allProducts.map((product) => (
+            <div className="card-wrap" key={product.id}>
+              <Card product={product} onHandleBuy={handleBuy} />
+            </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 }
