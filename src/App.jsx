@@ -54,7 +54,7 @@ export default function App() {
 
   return (
     <main className="app">
-      <h2 className="app-title">Khalti Integration - Hariyo Cycle Market</h2>
+      <h2 className="app-title">Khalti Integration - Hariyo Cycle Market - FYP</h2>
       <hr className="bg-white w-full" />
 
       {paymentSuccess ? (
